@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro Empleador</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main>
+    <h1>Registro de empleador</h1>
+    <p>Complete los datos de la empresa o entidad.</p>
+
+    <form id="formEmpleador">
+
+      <label>Nombre de la empresa</label>
+      <input id="nombreEmpresa" type="text" required>
+
+      <label>NIT</label>
+      <input id="nit" type="text" required>
+
+      <label>Correo empresarial</label>
+      <input id="correoEmpresa" type="email" required>
+
+      <label>Teléfono</label>
+      <input id="telefonoEmpresa" type="text">
+
+      <label>Ciudad</label>
+      <input id="ciudadEmpresa" type="text">
+
+      <label>Persona de contacto</label>
+      <input id="personaContacto" type="text">
+
+      <br><br>
+
+      <button type="submit">Enviar registro</button>
+    </form>
+
+    <br>
+    <a href="index.html">Volver al inicio</a>
+  </main>
+
+  <script type="module" src="empleador.js"></script>
+</body>
+</html>

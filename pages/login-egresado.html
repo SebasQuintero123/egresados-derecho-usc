@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Egresado</title>
+    <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/login-egresado.css">
+</head>
+<body>
+
+  <main class="login-page">
+    <section class="login-card">
+      <h1>Iniciar sesión</h1>
+    <p>Ingrese con su correo y contraseña.</p>
+
+    <form id="formLogin" class="login-form">
+
+  <div class="form-group">
+    <label for="correoLogin">Correo electrónico</label>
+    <input 
+      id="correoLogin" 
+      type="email" 
+      placeholder="correo@ejemplo.com" 
+      required
+    >
+  </div>
+
+  <div class="form-group">
+    <label for="passwordLogin">Contraseña</label>
+    <input 
+      id="passwordLogin" 
+      type="password" 
+      placeholder="Ingrese su contraseña" 
+      required
+    >
+  </div>
+
+  <button type="submit" class="btn-login">Ingresar</button>
+
+</form>
+
+    <br>
+    <a href="registro-egresado.html">No tengo cuenta</a>
+    <br>
+    <a href="egresado.html">Volver</a>
+  </main>
+
+  <script type="module" src="../js/login-egresado.js"></script>
+</body>
+</html>

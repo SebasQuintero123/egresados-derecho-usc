@@ -1,0 +1,141 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #e9e9e9;
+}
+
+.register-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.register-card {
+  width: 100%;
+  max-width: 900px;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  padding: 45px 40px;
+}
+
+.register-card h1 {
+  text-align: center;
+  color: #8b0000;
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.register-text {
+  text-align: center;
+  color: #333;
+  font-size: 1.1rem;
+  margin-bottom: 35px;
+  line-height: 1.5;
+}
+
+.register-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 25px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 8px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #cfcfcf;
+  border-radius: 8px;
+  font-size: 15px;
+  background: #fafafa;
+  outline: none;
+  transition: 0.3s;
+}
+
+.form-group input:focus {
+  border-color: #8b0000;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.10);
+}
+
+.check {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 15px;
+  color: #222;
+  margin-top: 5px;
+}
+
+.check input {
+  margin-top: 3px;
+}
+
+.btn-register {
+  grid-column: 1 / -1;
+  justify-self: center;
+  background: #f1c40f;
+  color: #222;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+
+.btn-register:hover {
+  background: #ddb20d;
+  transform: translateY(-2px);
+}
+
+.back-link {
+  display: block;
+  text-align: center;
+  margin-top: 28px;
+  font-weight: bold;
+  color: #8b0000;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .register-card {
+    padding: 30px 20px;
+  }
+
+  .register-card h1 {
+    font-size: 2rem;
+  }
+
+  .register-form {
+    grid-template-columns: 1fr;
+  }
+
+  .btn-register {
+    width: 100%;
+  }
+}

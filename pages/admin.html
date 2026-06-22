@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Administrador</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+  <main class="admin-page">
+
+    <section class="admin-panel">
+
+      <div class="admin-header">
+        <div>
+          <h1>Panel de administrador</h1>
+          <p>Registros de egresados pendientes por revisar.</p>
+        </div>
+
+        <button id="cerrarAdmin" class="btn-logout">Cerrar sesión</button>
+      </div>
+
+      <section id="listaPendientes" class="admin-list">
+        <p>Cargando registros pendientes...</p>
+      </section>
+
+      <a href="../index.html" class="back-link">Volver al inicio</a>
+
+    </section>
+
+  </main>
+
+  <script type="module" src="../js/admin.js"></script>
+</body>
+</html>
