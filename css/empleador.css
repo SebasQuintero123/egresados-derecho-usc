@@ -1,0 +1,639 @@
+.employer-page {
+  min-height: 100vh;
+  background: #eef3f7;
+  padding: 40px 8%;
+}
+
+.employer-card {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto 35px auto;
+  background: white;
+  padding: 40px;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+.employer-card h1 {
+  color: #8b0000;
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 12px;
+}
+
+.employer-card p {
+  text-align: center;
+  font-size: 17px;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.employer-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 25px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 7px;
+}
+
+.form-group input {
+  padding: 14px;
+  border: 1px solid #cfcfcf;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+}
+
+.form-group input:focus {
+  border-color: #8b0000;
+  box-shadow: 0 0 0 3px rgba(139,0,0,0.10);
+}
+
+.btn-employer {
+  grid-column: 1 / -1;
+  justify-self: center;
+  background: #f1c40f;
+  color: #222;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-employer:hover {
+  background: #ddb20d;
+}
+
+.back-link {
+  display: block;
+  text-align: center;
+  margin-top: 25px;
+  color: #8b0000;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.cv-zone {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.cv-zone-header {
+  background: white;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  align-items: center;
+}
+
+.cv-zone-header h2 {
+  color: #8b0000;
+  font-size: 30px;
+  margin-bottom: 6px;
+}
+
+.cv-zone-header p {
+  color: #444;
+}
+
+#buscarEgresado {
+  width: 360px;
+  padding: 14px;
+  border: 1px solid #cfcfcf;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.cv-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 25px;
+}
+
+.cv-card-public {
+  background: white;
+  border-radius: 18px;
+  padding: 30px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+  border-top: 6px solid #8b0000;
+}
+
+.cv-card-public h3 {
+  color: #8b0000;
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+
+.cv-card-public .cargo {
+  font-size: 18px;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 12px;
+}
+
+.cv-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 25px;
+  margin: 20px 0;
+}
+
+.cv-info-grid p {
+  background: #f7f7f7;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.cv-section {
+  margin-top: 22px;
+}
+
+.cv-section h4 {
+  color: #8b0000;
+  margin-bottom: 8px;
+  font-size: 19px;
+}
+
+.cv-section p {
+  color: #333;
+  line-height: 1.7;
+}
+
+.cv-actions {
+  margin-top: 25px;
+  display: flex;
+  gap: 15px;
+}
+
+.btn-view-cv {
+  background: #f1c40f;
+  color: #222;
+  padding: 13px 22px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.btn-contact {
+  background: #8b0000;
+  color: white;
+  padding: 13px 22px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.empty-message {
+  background: white;
+  padding: 30px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+}
+
+@media (max-width: 850px) {
+  .employer-page {
+    padding: 25px 20px;
+  }
+
+  .employer-form,
+  .cv-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cv-zone-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #buscarEgresado {
+    width: 100%;
+  }
+
+  .cv-actions {
+    flex-direction: column;
+  }
+}
+.employer-access-page,
+.employer-login-page,
+.employer-page {
+  min-height: 100vh;
+  background: #eef3f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.employer-access-card,
+.employer-login-card,
+.employer-card {
+  width: 100%;
+  max-width: 900px;
+  background: white;
+  padding: 45px;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.14);
+}
+
+.employer-access-card h1,
+.employer-login-card h1,
+.employer-card h1 {
+  color: #8b0000;
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+
+.employer-access-card p,
+.employer-login-card p,
+.employer-card p {
+  text-align: center;
+  font-size: 17px;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.employer-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.employer-option-card {
+  display: block;
+  background: #f7f7f7;
+  color: #222;
+  padding: 32px;
+  border-radius: 14px;
+  text-align: center;
+  text-decoration: none;
+  border-top: 6px solid #8b0000;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+}
+
+.employer-option-card h2 {
+  color: #8b0000;
+  margin-bottom: 12px;
+}
+
+.employer-option-card span {
+  display: inline-block;
+  background: #f1c40f;
+  color: #222;
+  padding: 13px 22px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.employer-form,
+.employer-login-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 25px;
+}
+
+.employer-login-form {
+  grid-template-columns: 1fr;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 7px;
+}
+
+.form-group input {
+  padding: 14px;
+  border: 1px solid #cfcfcf;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.btn-employer {
+  grid-column: 1 / -1;
+  justify-self: center;
+  background: #f1c40f;
+  color: #222;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.back-link,
+.employer-login-links a {
+  color: #8b0000;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.back-link {
+  display: block;
+  text-align: center;
+  margin-top: 25px;
+}
+
+.employer-login-links {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 25px;
+}
+
+.employer-panel-page {
+  min-height: 100vh;
+  background: #eef3f7;
+  padding: 35px 8%;
+}
+
+.employer-panel-header {
+  background: white;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.employer-panel-header h1 {
+  color: #8b0000;
+  font-size: 34px;
+}
+
+.btn-logout-employer {
+  background: #8b0000;
+  color: white;
+  border: none;
+  padding: 13px 22px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cv-zone {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.cv-zone-header {
+  background: white;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  align-items: center;
+}
+
+.cv-zone-header h2 {
+  color: #8b0000;
+  font-size: 30px;
+}
+
+#buscarEgresado {
+  width: 360px;
+  padding: 14px;
+  border: 1px solid #cfcfcf;
+  border-radius: 8px;
+}
+
+.cv-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 25px;
+}
+
+.cv-card-public {
+  background: white;
+  border-radius: 18px;
+  padding: 30px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+  border-top: 6px solid #8b0000;
+}
+
+.cv-card-public h3 {
+  color: #8b0000;
+  font-size: 26px;
+}
+
+.cargo {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.cv-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 25px;
+  margin: 20px 0;
+}
+
+.cv-info-grid p {
+  background: #f7f7f7;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.cv-section {
+  margin-top: 22px;
+}
+
+.cv-section h4 {
+  color: #8b0000;
+  margin-bottom: 8px;
+}
+
+.cv-actions {
+  margin-top: 25px;
+  display: flex;
+  gap: 15px;
+}
+
+.btn-view-cv,
+.btn-contact {
+  padding: 13px 22px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.btn-view-cv {
+  background: #f1c40f;
+  color: #222;
+}
+
+.btn-contact {
+  background: #8b0000;
+  color: white;
+}
+
+.empty-message {
+  background: white;
+  padding: 30px;
+  border-radius: 18px;
+  text-align: center;
+}
+
+@media (max-width: 850px) {
+  .employer-options,
+  .employer-form,
+  .cv-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .employer-panel-header,
+  .cv-zone-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  #buscarEgresado {
+    width: 100%;
+  }
+
+  .cv-actions {
+    flex-direction: column;
+  }
+}
+.employer-tabs {
+  max-width: 1200px;
+  margin: 0 auto 30px auto;
+  background: white;
+  padding: 15px;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  display: flex;
+  gap: 15px;
+}
+
+.tab-employer {
+  border: none;
+  background: #f0f3f6;
+  color: #222;
+  padding: 14px 28px;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.tab-employer.active {
+  background: #8b0000;
+  color: white;
+}
+
+.job-zone {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+.job-card-form {
+  background: white;
+  padding: 35px;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+}
+
+.job-card-form h2 {
+  color: #8b0000;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.job-card-form p {
+  color: #444;
+  margin-bottom: 25px;
+}
+
+.job-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 25px;
+}
+
+.job-form .full {
+  grid-column: 1 / -1;
+}
+
+.job-form select,
+.job-form textarea {
+  padding: 14px;
+  border: 1px solid #cfcfcf;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  font-family: Arial, sans-serif;
+}
+
+.job-form select:focus,
+.job-form textarea:focus {
+  border-color: #8b0000;
+  box-shadow: 0 0 0 3px rgba(139,0,0,0.10);
+}
+
+.jobs-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+.job-public-card {
+  background: #f7f7f7;
+  border-left: 6px solid #8b0000;
+  padding: 22px;
+  border-radius: 12px;
+}
+
+.job-public-card h3 {
+  color: #8b0000;
+  margin-bottom: 12px;
+}
+
+.job-public-card p {
+  margin-bottom: 8px;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 850px) {
+  .employer-tabs {
+    flex-direction: column;
+  }
+
+  .job-form {
+    grid-template-columns: 1fr;
+  }
+}

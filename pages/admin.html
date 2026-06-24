@@ -12,22 +12,106 @@
 
   <main class="admin-page">
 
-    <section class="admin-panel">
+    <section class="admin-card">
 
-      <div class="admin-header">
+      <header class="admin-header">
         <div>
           <h1>Panel de administrador</h1>
-          <p>Registros de egresados pendientes por revisar.</p>
+          <p>Gestione egresados, registros rechazados y eventos.</p>
         </div>
 
-        <button id="cerrarAdmin" class="btn-logout">Cerrar sesión</button>
-      </div>
+        <button id="cerrarSesionAdmin" class="btn-admin-danger">
+          Cerrar sesión
+        </button>
+      </header>
 
-      <section id="listaPendientes" class="admin-list">
-        <p>Cargando registros pendientes...</p>
+      <nav class="admin-menu">
+        <button id="btnPendientes" class="admin-tab active">Pendientes</button>
+        <button id="btnRechazados" class="admin-tab">Rechazados</button>
+        <button id="btnEventosAdmin" class="admin-tab">Eventos</button>
+      </nav>
+
+      <!-- PENDIENTES -->
+      <section id="seccionPendientes" class="admin-section">
+        <h2>Registros pendientes</h2>
+        <p>Revise los egresados pendientes por aprobar.</p>
+
+        <div id="listaPendientes" class="admin-list">
+          <p>Cargando registros pendientes...</p>
+        </div>
       </section>
 
-      <a href="../index.html" class="back-link">Volver al inicio</a>
+      <!-- RECHAZADOS -->
+      <section id="seccionRechazados" class="admin-section hidden">
+        <h2>Registros rechazados</h2>
+        <p>Consulte los registros rechazados. Puede eliminarlos si ya no se necesitan.</p>
+
+        <div id="listaRechazados" class="admin-list">
+          <p>Cargando registros rechazados...</p>
+        </div>
+      </section>
+
+      <!-- EVENTOS -->
+      <section id="seccionEventosAdmin" class="admin-section hidden">
+        <h2>Publicar evento</h2>
+        <p>Estos eventos aparecerán en el panel de los egresados.</p>
+
+        <form id="formEvento" class="admin-form">
+
+          <div class="form-group">
+            <label for="tituloEvento">Título del evento</label>
+            <input id="tituloEvento" type="text" placeholder="Ejemplo: Conferencia de derecho laboral" required>
+          </div>
+
+          <div class="form-group">
+            <label for="fechaEvento">Fecha del evento</label>
+            <input id="fechaEvento" type="date" required>
+          </div>
+
+          <div class="form-group">
+            <label for="horaEvento">Hora</label>
+            <input id="horaEvento" type="time">
+          </div>
+
+          <div class="form-group">
+            <label for="lugarEvento">Lugar</label>
+            <input id="lugarEvento" type="text" placeholder="Ejemplo: Auditorio principal o enlace virtual">
+          </div>
+
+          <div class="form-group">
+            <label for="modalidadEvento">Modalidad</label>
+            <select id="modalidadEvento" required>
+              <option value="">Seleccione una opción</option>
+              <option value="Presencial">Presencial</option>
+              <option value="Virtual">Virtual</option>
+              <option value="Híbrido">Híbrido</option>
+            </select>
+          </div>
+
+          <div class="form-group full">
+            <label for="descripcionEvento">Descripción</label>
+            <textarea id="descripcionEvento" rows="4" placeholder="Describa brevemente el evento" required></textarea>
+          </div>
+
+          <div class="form-group full">
+            <label for="enlaceEvento">Enlace del evento</label>
+            <input id="enlaceEvento" type="url" placeholder="Pegue aquí el enlace si el evento es virtual">
+          </div>
+
+          <button type="submit" class="btn-admin-main">
+            Publicar evento
+          </button>
+
+        </form>
+
+        <h2 class="admin-subtitle">Eventos publicados</h2>
+
+        <div id="listaEventosAdmin" class="admin-list">
+          <p>Cargando eventos...</p>
+        </div>
+      </section>
+
+      <a href="../index.html" class="admin-back">Volver al inicio</a>
 
     </section>
 

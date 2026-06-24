@@ -2,7 +2,7 @@ import { auth, db } from "./firebaseConfig.js";
 
 import {
   signInWithEmailAndPassword,
-  signOut
+  signOut,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import {
@@ -14,6 +14,7 @@ const formLogin = document.getElementById("formLogin");
 
 console.log("login-egresado.js cargado correctamente");
 
+// INICIAR SESIÓN
 formLogin.addEventListener("submit", async (event) => {
   event.preventDefault();
 

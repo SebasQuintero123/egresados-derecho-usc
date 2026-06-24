@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro Empleador</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/empleador.css">
+</head>
+<body>
+
+  <main class="employer-page">
+
+    <section class="employer-card">
+
+      <h1>Registro de empleador</h1>
+
+      <p>
+        Complete los datos de la empresa o entidad para crear la cuenta empresarial.
+      </p>
+
+      <form id="formRegistroEmpleador" class="employer-form">
+
+        <div class="form-group">
+          <label for="empresa">Nombre de la empresa</label>
+          <input id="empresa" type="text" placeholder="Nombre de la empresa o entidad" required>
+        </div>
+
+        <div class="form-group">
+          <label for="nit">NIT</label>
+          <input id="nit" type="text" placeholder="NIT de la empresa" required>
+        </div>
+
+        <div class="form-group">
+          <label for="correoEmpresa">Correo empresarial</label>
+          <input id="correoEmpresa" type="email" placeholder="correo@empresa.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="telefonoEmpresa">Teléfono</label>
+          <input id="telefonoEmpresa" type="text" placeholder="Número de contacto">
+        </div>
+
+        <div class="form-group">
+          <label for="ciudadEmpresa">Ciudad</label>
+          <input id="ciudadEmpresa" type="text" placeholder="Ciudad">
+        </div>
+
+        <div class="form-group">
+          <label for="personaContacto">Persona de contacto</label>
+          <input id="personaContacto" type="text" placeholder="Nombre de contacto" required>
+        </div>
+
+        <div class="form-group">
+          <label for="passwordEmpresa">Contraseña</label>
+          <input id="passwordEmpresa" type="password" placeholder="Cree una contraseña" required>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmarPasswordEmpresa">Confirmar contraseña</label>
+          <input id="confirmarPasswordEmpresa" type="password" placeholder="Repita la contraseña" required>
+        </div>
+
+        <button type="submit" class="btn-employer">Registrarme</button>
+
+      </form>
+
+      <a href="empleador.html" class="back-link">Volver</a>
+
+    </section>
+
+  </main>
+
+  <script type="module" src="../js/registro-empleador.js"></script>
+</body>
+</html>

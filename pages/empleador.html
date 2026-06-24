@@ -3,44 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registro Empleador</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Portal Empleador</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/empleador.css">
 </head>
 <body>
 
-  <main>
-    <h1>Registro de empleador</h1>
-    <p>Complete los datos de la empresa o entidad.</p>
+  <main class="employer-access-page">
 
-    <form id="formEmpleador">
+    <section class="employer-access-card">
 
-      <label>Nombre de la empresa</label>
-      <input id="nombreEmpresa" type="text" required>
+      <h1>Portal del empleador</h1>
 
-      <label>NIT</label>
-      <input id="nit" type="text" required>
+      <p>
+        Ingrese como empresa o entidad para consultar hojas de vida publicadas
+        por egresados del programa de Derecho USC.
+      </p>
 
-      <label>Correo empresarial</label>
-      <input id="correoEmpresa" type="email" required>
+      <div class="employer-options">
 
-      <label>Teléfono</label>
-      <input id="telefonoEmpresa" type="text">
+        <a href="login-empleador.html" class="employer-option-card">
+          <h2>Ya tengo cuenta</h2>
+          <p>Ingrese con el correo empresarial y la contraseña registrada.</p>
+          <span>Iniciar sesión</span>
+        </a>
 
-      <label>Ciudad</label>
-      <input id="ciudadEmpresa" type="text">
+        <a href="registro-empleador.html" class="employer-option-card">
+          <h2>Quiero registrarme</h2>
+          <p>Registre los datos de la empresa para consultar hojas de vida.</p>
+          <span>Crear cuenta</span>
+        </a>
 
-      <label>Persona de contacto</label>
-      <input id="personaContacto" type="text">
+      </div>
 
-      <br><br>
+      <a href="../index.html" class="back-link">Volver al inicio</a>
 
-      <button type="submit">Enviar registro</button>
-    </form>
+    </section>
 
-    <br>
-    <a href="index.html">Volver al inicio</a>
   </main>
 
-  <script type="module" src="empleador.js"></script>
 </body>
 </html>

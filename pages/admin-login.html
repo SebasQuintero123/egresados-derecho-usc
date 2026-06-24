@@ -6,36 +6,57 @@
   <title>Login Administrador</title>
 
   <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="stylesheet" href="../css/admin-login.css">
 </head>
 <body>
 
   <main class="admin-login-page">
 
     <section class="admin-login-card">
+
+      <div class="admin-icon">
+        🔐
+      </div>
+
       <h1>Acceso administrador</h1>
 
       <p>
-        Ingrese con el correo y la contraseña autorizados para revisar registros de egresados.
+        Ingrese con el correo y la contraseña autorizados para revisar registros
+        de egresados y empleadores.
       </p>
 
-      <form id="formAdminLogin" class="admin-form">
+      <form id="formAdminLogin" class="admin-login-form">
 
         <div class="form-group">
           <label for="correoAdmin">Correo electrónico</label>
-          <input id="correoAdmin" type="email" placeholder="admin@ejemplo.com" required>
+          <input 
+            id="correoAdmin" 
+            type="email" 
+            placeholder="admin@ejemplo.com" 
+            required
+          >
         </div>
 
         <div class="form-group">
           <label for="passwordAdmin">Contraseña</label>
-          <input id="passwordAdmin" type="password" placeholder="Ingrese la contraseña" required>
+          <input 
+            id="passwordAdmin" 
+            type="password" 
+            placeholder="Ingrese su contraseña" 
+            required
+          >
         </div>
 
-        <button type="submit" class="btn-admin">Ingresar</button>
+        <button type="submit" class="btn-admin-login">
+          Ingresar
+        </button>
 
       </form>
 
-      <a href="../index.html" class="back-link">Volver al inicio</a>
+      <a href="../index.html" class="back-link">
+        Volver al inicio
+      </a>
+
     </section>
 
   </main>

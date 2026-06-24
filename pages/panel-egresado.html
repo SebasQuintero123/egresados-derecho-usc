@@ -4,27 +4,225 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Panel Egresado</title>
-  <link rel="stylesheet" href="style.css">
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/panel-egresado.css">
 </head>
 <body>
 
-  <main>
-    <h1 id="bienvenida">Bienvenido</h1>
-    <p>Panel privado del egresado.</p>
+  <main class="panel-page">
 
-    <section>
-      <button>Mi perfil</button>
-      <button>Ofertas laborales</button>
-      <button>Eventos</button>
-      <button>Educación continua</button>
-      <button>Solicitudes</button>
+    <!-- ENCABEZADO -->
+    <header class="panel-header">
+      <div>
+        <h1 id="bienvenida">Bienvenido</h1>
+        <p>Panel privado del egresado</p>
+      </div>
+
+      <button id="cerrarSesion" class="btn-logout">
+        Cerrar sesión
+      </button>
+    </header>
+
+    <!-- MENÚ -->
+    <nav class="panel-menu">
+      <button id="btnMiHojaVida" class="menu-btn active">
+        Mi hoja de vida
+      </button>
+
+      <button id="btnOfertasLaborales" class="menu-btn">
+        Ofertas laborales
+      </button>
+
+      <button class="menu-btn">
+        Eventos
+      </button>
+
+      <button class="menu-btn">
+        Educación continua
+      </button>
+
+      <button class="menu-btn">
+        Solicitudes
+      </button>
+    </nav>
+
+    <!-- SECCIÓN: MI HOJA DE VIDA -->
+    <section id="seccionMiHojaVida" class="panel-content">
+
+      <div class="cv-main">
+
+        <!-- PERFIL SUPERIOR -->
+        <section class="cv-card profile-card-panel">
+          <div class="profile-top">
+
+            <div class="profile-photo">
+              <span>👤</span>
+            </div>
+
+            <div>
+              <h2 id="nombreVista">Nombre del egresado</h2>
+              <p id="cargoVista">Cargo actual</p>
+              <p id="ciudadVista">Ciudad</p>
+              <p id="correoVista">Correo electrónico</p>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- FORMULARIO HOJA DE VIDA -->
+        <form id="formPerfil" class="cv-card cv-form">
+
+          <h2>Datos personales</h2>
+
+          <div class="form-grid">
+
+            <div class="form-group">
+              <label for="nombrePerfil">Nombre completo</label>
+              <input id="nombrePerfil" type="text" disabled>
+            </div>
+
+            <div class="form-group">
+              <label for="documentoPerfil">Documento</label>
+              <input id="documentoPerfil" type="text" disabled>
+            </div>
+
+            <div class="form-group">
+              <label for="correoPerfil">Correo electrónico</label>
+              <input id="correoPerfil" type="email" disabled>
+            </div>
+
+            <div class="form-group">
+              <label for="celularPerfil">Celular</label>
+              <input id="celularPerfil" type="text" placeholder="Número de contacto">
+            </div>
+
+            <div class="form-group">
+              <label for="ciudadPerfil">Ciudad de residencia</label>
+              <input id="ciudadPerfil" type="text" placeholder="Ciudad">
+            </div>
+
+            <div class="form-group">
+              <label for="cargoActualPerfil">Cargo actual</label>
+              <input id="cargoActualPerfil" type="text" placeholder="Ejemplo: Abogado litigante">
+            </div>
+
+          </div>
+
+          <h2>Perfil profesional</h2>
+
+          <div class="form-group">
+            <label for="perfilProfesional">Descripción profesional</label>
+            <textarea id="perfilProfesional" rows="5" placeholder="Escriba una breve descripción de su perfil profesional"></textarea>
+          </div>
+
+          <h2>Experiencia profesional</h2>
+
+          <div class="form-group">
+            <label for="experienciaProfesional">Experiencia</label>
+            <textarea id="experienciaProfesional" rows="5" placeholder="Ejemplo: cargo, empresa, funciones y tiempo laborado"></textarea>
+          </div>
+
+          <h2>Estudios</h2>
+
+          <div class="form-group">
+            <label for="estudios">Formación académica</label>
+            <textarea id="estudios" rows="4" placeholder="Ejemplo: Derecho - Universidad Santiago de Cali - Año de grado"></textarea>
+          </div>
+
+          <h2>Habilidades</h2>
+
+          <div class="form-group">
+            <label for="habilidades">Conocimientos y habilidades</label>
+            <textarea id="habilidades" rows="4" placeholder="Ejemplo: derecho laboral, derecho penal, redacción jurídica, conciliación"></textarea>
+          </div>
+
+          <h2>Idiomas</h2>
+
+          <div class="form-group">
+            <label for="idiomas">Idiomas</label>
+            <input id="idiomas" type="text" placeholder="Ejemplo: Español nativo, inglés básico">
+          </div>
+
+          <h2>Movilidad</h2>
+
+          <div class="form-group">
+            <label for="movilidad">Disponibilidad</label>
+            <textarea id="movilidad" rows="3" placeholder="Ejemplo: disponible para viajar, trabajo remoto, cambio de ciudad"></textarea>
+          </div>
+
+          <h2>Hoja de vida</h2>
+
+          <div class="form-group">
+            <label for="hojaDeVidaUrl">Enlace de hoja de vida</label>
+            <input id="hojaDeVidaUrl" type="url" placeholder="Pegue aquí un enlace de su hoja de vida en PDF">
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn-save">
+              Guardar y publicar hoja de vida
+            </button>
+
+            <button type="button" id="despublicarHV" class="btn-secondary">
+              Ocultar hoja de vida
+            </button>
+          </div>
+
+        </form>
+
+      </div>
+
+      <!-- PANEL LATERAL -->
+      <aside class="cv-sidebar">
+
+        <section class="side-card">
+          <h3>Estado de hoja de vida</h3>
+          <p id="estadoPublicacion">No publicada</p>
+        </section>
+
+        <section class="side-card">
+          <h3>Consejo</h3>
+          <p>
+            Complete su perfil con datos claros. Esto ayuda a que los empleadores
+            conozcan mejor su experiencia y formación.
+          </p>
+        </section>
+
+        <section class="side-card">
+          <h3>Opciones</h3>
+          <p>
+            Desde este panel puede actualizar su hoja de vida y consultar ofertas laborales.
+          </p>
+        </section>
+
+      </aside>
+
     </section>
 
-    <br>
+    <!-- SECCIÓN: OFERTAS LABORALES -->
+    <section id="seccionOfertasLaborales" class="jobs-egresado-section hidden">
 
-    <button id="cerrarSesion">Cerrar sesión</button>
+      <div class="jobs-egresado-header">
+        <div>
+          <h2>Ofertas laborales disponibles</h2>
+          <p>Consulte las ofertas publicadas por empleadores registrados.</p>
+        </div>
+
+        <input 
+          id="buscarOfertaLaboral" 
+          type="text" 
+          placeholder="Buscar por cargo, empresa o ciudad"
+        >
+      </div>
+
+      <div id="listaOfertasLaborales" class="jobs-egresado-list">
+        <p>Cargando ofertas laborales...</p>
+      </div>
+
+    </section>
+
   </main>
 
-  <script type="module" src="panel-egresado.js"></script>
+  <script type="module" src="../js/panel-egresado.js"></script>
 </body>
 </html>

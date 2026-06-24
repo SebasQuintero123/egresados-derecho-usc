@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Empleador</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/empleador.css">
+</head>
+<body>
+
+  <main class="employer-panel-page">
+
+    <section class="employer-panel-header">
+      <div>
+        <h1 id="nombreEmpresaVista">Panel del empleador</h1>
+        <p>Consulte hojas de vida y publique ofertas laborales.</p>
+      </div>
+
+      <button id="cerrarSesionEmpleador" class="btn-logout-employer">
+        Cerrar sesión
+      </button>
+    </section>
+
+    <section class="employer-tabs">
+      <button id="btnVerHojasVida" class="tab-employer active">
+        Ver hojas de vida
+      </button>
+
+      <button id="btnPublicarOferta" class="tab-employer">
+        Publicar oferta laboral
+      </button>
+    </section>
+
+    <section id="seccionHojasVida" class="cv-zone">
+
+      <div class="cv-zone-header">
+        <div>
+          <h2>Hojas de vida publicadas</h2>
+          <p>Busque egresados por nombre, ciudad, cargo, estudios o habilidades.</p>
+        </div>
+
+        <input id="buscarEgresado" type="text" placeholder="Buscar egresado">
+      </div>
+
+      <div id="listaHojasVida" class="cv-list">
+        <p>Cargando hojas de vida...</p>
+      </div>
+
+    </section>
+
+    <section id="seccionOfertaLaboral" class="job-zone hidden">
+
+      <div class="job-card-form">
+        <h2>Publicar oferta laboral</h2>
+
+        <p>
+          Complete los datos de la vacante. Esta oferta será visible para los egresados aprobados.
+        </p>
+
+        <form id="formOfertaLaboral" class="job-form">
+
+          <div class="form-group">
+            <label for="tituloOferta">Título de la oferta</label>
+            <input id="tituloOferta" type="text" placeholder="Ejemplo: Abogado junior" required>
+          </div>
+
+          <div class="form-group">
+            <label for="ciudadOferta">Ciudad</label>
+            <input id="ciudadOferta" type="text" placeholder="Ejemplo: Cali" required>
+          </div>
+
+          <div class="form-group">
+            <label for="modalidadOferta">Modalidad</label>
+            <select id="modalidadOferta" required>
+              <option value="">Seleccione una opción</option>
+              <option value="Presencial">Presencial</option>
+              <option value="Remoto">Remoto</option>
+              <option value="Híbrido">Híbrido</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="salarioOferta">Salario</label>
+            <input id="salarioOferta" type="text" placeholder="Ejemplo: $2.500.000 o A convenir">
+          </div>
+
+          <div class="form-group full">
+            <label for="descripcionOferta">Descripción del cargo</label>
+            <textarea id="descripcionOferta" rows="5" placeholder="Describa las funciones principales" required></textarea>
+          </div>
+
+          <div class="form-group full">
+            <label for="requisitosOferta">Requisitos</label>
+            <textarea id="requisitosOferta" rows="4" placeholder="Ejemplo: experiencia, conocimientos, habilidades"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="correoContactoOferta">Correo de contacto</label>
+            <input id="correoContactoOferta" type="email" placeholder="correo@empresa.com" required>
+          </div>
+
+          <button type="submit" class="btn-employer">
+            Publicar oferta
+          </button>
+
+        </form>
+      </div>
+
+      <div class="job-card-form">
+        <h2>Mis ofertas publicadas</h2>
+        <div id="listaOfertasEmpresa" class="jobs-list">
+          <p>Cargando ofertas...</p>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script type="module" src="../js/panel-empleador.js"></script>
+</body>
+</html>

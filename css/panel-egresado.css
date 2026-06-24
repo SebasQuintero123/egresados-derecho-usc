@@ -1,0 +1,348 @@
+.panel-page {
+  min-height: 100vh;
+  background: #eef3f7;
+  padding: 25px 8%;
+}
+
+.panel-header {
+  background: white;
+  padding: 25px 30px;
+  border-radius: 18px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.panel-header h1 {
+  color: #8b0000;
+  font-size: 32px;
+  margin-bottom: 5px;
+}
+
+.panel-header p {
+  color: #555;
+}
+
+.btn-logout {
+  background: #8b0000;
+  color: white;
+  border: none;
+  padding: 13px 22px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.panel-menu {
+  background: white;
+  padding: 15px;
+  border-radius: 18px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+  overflow-x: auto;
+}
+
+.menu-btn {
+  border: none;
+  background: #f0f3f6;
+  padding: 13px 25px;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #333;
+  white-space: nowrap;
+}
+
+.menu-btn.active {
+  background: #8b0000;
+  color: white;
+}
+
+.panel-content {
+  display: grid;
+  grid-template-columns: 1fr 330px;
+  gap: 30px;
+  align-items: start;
+}
+
+.cv-main {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.cv-card,
+.side-card {
+  background: white;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+}
+
+.profile-top {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.profile-photo {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: #f1c40f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 45px;
+}
+
+.profile-card-panel h2 {
+  color: #222;
+  font-size: 28px;
+  margin-bottom: 5px;
+}
+
+.profile-card-panel p {
+  color: #555;
+  margin-bottom: 4px;
+}
+
+.cv-form h2 {
+  color: #8b0000;
+  font-size: 24px;
+  margin: 30px 0 15px;
+}
+
+.cv-form h2:first-child {
+  margin-top: 0;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 25px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 7px;
+  color: #222;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  border: 1px solid #cfcfcf;
+  border-radius: 9px;
+  padding: 14px;
+  font-size: 15px;
+  outline: none;
+  background: #fafafa;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #8b0000;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(139,0,0,0.10);
+}
+
+.form-group input:disabled {
+  background: #e9ecef;
+  color: #555;
+}
+
+.form-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.btn-save {
+  background: #f1c40f;
+  color: #222;
+  border: none;
+  padding: 15px 26px;
+  border-radius: 9px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background: #8b0000;
+  color: white;
+  border: none;
+  padding: 15px 26px;
+  border-radius: 9px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cv-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  position: sticky;
+  top: 25px;
+}
+
+.side-card h3 {
+  color: #8b0000;
+  margin-bottom: 12px;
+  font-size: 22px;
+}
+
+.side-card p {
+  color: #444;
+  line-height: 1.6;
+}
+
+#estadoPublicacion {
+  font-weight: bold;
+  color: #222;
+}
+
+.btn-side {
+  width: 100%;
+  margin-top: 12px;
+  background: #8b0000;
+  color: white;
+  border: none;
+  padding: 13px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+@media (max-width: 950px) {
+  .panel-page {
+    padding: 20px;
+  }
+
+  .panel-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 18px;
+  }
+
+  .panel-content {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-top {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .cv-sidebar {
+    position: static;
+  }
+}
+.jobs-egresado-section {
+  max-width: 1200px;
+  margin: 30px auto;
+}
+
+.jobs-egresado-header {
+  background: white;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  align-items: center;
+}
+
+.jobs-egresado-header h2 {
+  color: #8b0000;
+  font-size: 30px;
+}
+
+.jobs-egresado-header p {
+  color: #444;
+}
+
+#buscarOfertaLaboral {
+  width: 360px;
+  padding: 14px;
+  border: 1px solid #cfcfcf;
+  border-radius: 8px;
+}
+
+.jobs-egresado-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 25px;
+}
+
+.job-egresado-card {
+  background: white;
+  border-radius: 18px;
+  padding: 30px;
+  border-top: 6px solid #8b0000;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+}
+
+.job-egresado-card h3 {
+  color: #8b0000;
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.empresa-oferta {
+  font-weight: bold;
+  font-size: 18px;
+  color: #222;
+  margin-bottom: 18px;
+}
+
+.job-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 25px;
+  margin: 20px 0;
+}
+
+.job-info-grid p {
+  background: #f7f7f7;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+@media (max-width: 850px) {
+  .jobs-egresado-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  #buscarOfertaLaboral {
+    width: 100%;
+  }
+
+  .job-info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.hidden {
+  display: none;
+}
