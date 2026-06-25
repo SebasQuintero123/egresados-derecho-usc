@@ -15,7 +15,8 @@ import {
   updateDoc,
   deleteDoc,
   addDoc,
-  serverTimestamp
+  serverTimestamp,
+  orderBy
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const cerrarSesionAdmin = document.getElementById("cerrarSesionAdmin");
@@ -450,3 +451,87 @@ cerrarSesionAdmin.addEventListener("click", async () => {
   await signOut(auth);
   window.location.href = "admin-login.html";
 });
+
+const formEvento = document.getElementById("formEvento");
+const listaEventosAdmin = document.getElementById("listaEventosAdmin");
+
+formEvento.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const titulo = document.getElementById("tituloEvento").value.trim();
+  const fechaEvento = document.getElementById("fechaEvento").value;
+  const horaEvento = document.getElementById("horaEvento").value;
+  const lugar = document.getElementById("lugarEvento").value.trim();
+  const modalidad = document.getElementById("modalidadEvento").value;
+  const descripcion = document.getElementById("descripcionEvento").value.trim();
+  const enlace = document.getElementById("enlaceEvento").value.trim();
+
+  try {
+    await addDoc(collection(db, "eventos"), {
+      titulo,
+      fechaEvento,
+      horaEvento,
+      lugar,
+      modalidad,
+      descripcion,
+      enlace,
+      estado: "publicado",
+      fechaCreacion: serverTimestamp()
+    });
+
+    alert("Evento publicado correctamente.");
+
+    formEvento.reset();
+    cargarEventosAdmin();
+
+  } catch (error) {
+    console.error("Error al publicar evento:", error);
+    alert("No se pudo publicar el evento. Revise permisos o consola.");
+  }
+});
+
+async function cargarEventosAdmin() {
+  if (!listaEventosAdmin) return;
+
+  listaEventosAdmin.innerHTML = "<p>Cargando eventos...</p>";
+
+  try {
+    const consulta = query(
+      collection(db, "eventos"),
+      orderBy("fechaEvento", "asc")
+    );
+
+    const resultado = await getDocs(consulta);
+
+    if (resultado.empty) {
+      listaEventosAdmin.innerHTML = "<p>No hay eventos publicados.</p>";
+      return;
+    }
+
+    listaEventosAdmin.innerHTML = "";
+
+    resultado.forEach((documento) => {
+      const evento = documento.data();
+
+      listaEventosAdmin.innerHTML += `
+        <article class="admin-item">
+          <h3>${evento.titulo || "Evento sin título"}</h3>
+          <p><strong>Fecha:</strong> ${evento.fechaEvento || "Sin fecha"}</p>
+          <p><strong>Hora:</strong> ${evento.horaEvento || "Sin hora"}</p>
+          <p><strong>Lugar:</strong> ${evento.lugar || "No registrado"}</p>
+          <p><strong>Modalidad:</strong> ${evento.modalidad || "No registrada"}</p>
+          <p>${evento.descripcion || ""}</p>
+          ${
+            evento.enlace
+              ? `<a href="${evento.enlace}" target="_blank">Ver enlace del evento</a>`
+              : ""
+          }
+        </article>
+      `;
+    });
+
+  } catch (error) {
+    console.error("Error al cargar eventos:", error);
+    listaEventosAdmin.innerHTML = "<p>No se pudieron cargar los eventos.</p>";
+  }
+}

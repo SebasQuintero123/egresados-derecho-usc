@@ -13,7 +13,8 @@ import {
   collection,
   getDocs,
   query,
-  where
+  where,
+  orderBy
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 // ELEMENTOS PRINCIPALES
@@ -34,6 +35,16 @@ const seccionOfertasLaborales = document.getElementById("seccionOfertasLaborales
 // OFERTAS LABORALES
 const listaOfertasLaborales = document.getElementById("listaOfertasLaborales");
 const buscarOfertaLaboral = document.getElementById("buscarOfertaLaboral");
+
+const btnMiHojaVida = document.getElementById("btnMiHojaVida");
+const btnOfertasLaborales = document.getElementById("btnOfertasLaborales");
+const btnEventos = document.getElementById("btnEventos");
+
+const seccionMiHojaVida = document.getElementById("seccionMiHojaVida");
+const seccionOfertasLaborales = document.getElementById("seccionOfertasLaborales");
+const seccionEventosEgresado = document.getElementById("seccionEventosEgresado");
+
+const listaEventosEgresado = document.getElementById("listaEventosEgresado");
 
 let usuarioActual = null;
 let referenciaEgresado = null;
@@ -287,3 +298,87 @@ cerrarSesion.addEventListener("click", async () => {
   await signOut(auth);
   window.location.href = "login-egresado.html";
 });
+
+function ocultarSecciones() {
+  seccionMiHojaVida.classList.add("hidden");
+  seccionOfertasLaborales.classList.add("hidden");
+  seccionEventosEgresado.classList.add("hidden");
+
+  btnMiHojaVida.classList.remove("active");
+  btnOfertasLaborales.classList.remove("active");
+  btnEventos.classList.remove("active");
+}
+
+btnMiHojaVida.addEventListener("click", () => {
+  ocultarSecciones();
+  seccionMiHojaVida.classList.remove("hidden");
+  btnMiHojaVida.classList.add("active");
+});
+
+btnOfertasLaborales.addEventListener("click", () => {
+  ocultarSecciones();
+  seccionOfertasLaborales.classList.remove("hidden");
+  btnOfertasLaborales.classList.add("active");
+
+  // Si ya tienes esta función creada, la dejas.
+  if (typeof cargarOfertasLaborales === "function") {
+    cargarOfertasLaborales();
+  }
+});
+
+btnEventos.addEventListener("click", () => {
+  ocultarSecciones();
+  seccionEventosEgresado.classList.remove("hidden");
+  btnEventos.classList.add("active");
+
+  cargarEventosEgresado();
+});
+
+async function cargarEventosEgresado() {
+  listaEventosEgresado.innerHTML = "<p>Cargando eventos...</p>";
+
+  try {
+    const consulta = query(
+      collection(db, "eventos"),
+      orderBy("fechaEvento", "asc")
+    );
+
+    const resultado = await getDocs(consulta);
+
+    if (resultado.empty) {
+      listaEventosEgresado.innerHTML = "<p>No hay eventos publicados por el momento.</p>";
+      return;
+    }
+
+    listaEventosEgresado.innerHTML = "";
+
+    resultado.forEach((documento) => {
+      const evento = documento.data();
+
+      if (evento.estado !== "publicado") return;
+
+      listaEventosEgresado.innerHTML += `
+        <article class="job-card">
+          <h3>${evento.titulo || "Evento"}</h3>
+
+          <p><strong>Fecha:</strong> ${evento.fechaEvento || "Sin fecha"}</p>
+          <p><strong>Hora:</strong> ${evento.horaEvento || "Sin hora"}</p>
+          <p><strong>Lugar:</strong> ${evento.lugar || "No registrado"}</p>
+          <p><strong>Modalidad:</strong> ${evento.modalidad || "No registrada"}</p>
+
+          <p>${evento.descripcion || ""}</p>
+
+          ${
+            evento.enlace
+              ? `<a href="${evento.enlace}" target="_blank" class="btn-job">Ver enlace del evento</a>`
+              : ""
+          }
+        </article>
+      `;
+    });
+
+  } catch (error) {
+    console.error("Error al cargar eventos:", error);
+    listaEventosEgresado.innerHTML = "<p>No se pudieron cargar los eventos.</p>";
+  }
+}
