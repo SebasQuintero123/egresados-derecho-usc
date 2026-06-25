@@ -19,6 +19,11 @@ import {
   orderBy
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+alert("admin.js versión 10 cargado");
+
+// ===============================
+// ELEMENTOS PRINCIPALES
+// ===============================
 const cerrarSesionAdmin = document.getElementById("cerrarSesionAdmin");
 
 const btnPendientes = document.getElementById("btnPendientes");
@@ -37,31 +42,58 @@ const listaEventosAdmin = document.getElementById("listaEventosAdmin");
 
 let usuarioAdmin = null;
 
+// ===============================
+// VALIDAR ADMINISTRADOR
+// ===============================
 onAuthStateChanged(auth, async (usuario) => {
   if (!usuario) {
     window.location.href = "admin-login.html";
     return;
   }
 
-  usuarioAdmin = usuario;
+  try {
+    usuarioAdmin = usuario;
 
-  const adminRef = doc(db, "admin", usuario.uid);
-  const adminDoc = await getDoc(adminRef);
+    alert("Usuario activo: " + usuario.email + " / UID: " + usuario.uid);
 
-  if (!adminDoc.exists()) {
-    alert("No tiene permisos de administrador.");
-    await signOut(auth);
-    window.location.href = "admin-login.html";
-    return;
-  }
 
-  cargarPendientes();
-  cargarRechazados();
-  cargarEventosAdmin();
+    // IMPORTANTE:
+    // Si tu colección en Firestore se llama "admins", déjalo así.
+    // No debe ser "admin" en singular.
+    const adminRef = doc(db, "admin", usuario.uid);
+    const adminDoc = await getDoc(adminRef);
+
+    if (!adminDoc.exists()) {
+      alert("No tiene permisos de administrador.");
+      await signOut(auth);
+      window.location.href = "admin-login.html";
+      return;
+    }
+
+    const datosAdmin = adminDoc.data();
+
+    if (datosAdmin.rol !== "admin" || datosAdmin.activo !== true) {
+      alert("El acceso de administrador no está activo.");
+      await signOut(auth);
+      window.location.href = "admin-login.html";
+      return;
+    }
+
+    cargarPendientes();
+    cargarRechazados();
+    cargarEventosAdmin();
+
+  } catch (error) {
+  console.error("Error validando administrador:", error);
+  alert("Error real: " + error.message);
+  await signOut(auth);
+  window.location.href = "admin-login.html";
+}
 });
 
-/* CAMBIO DE PESTAÑAS */
-
+// ===============================
+// CAMBIO DE PESTAÑAS
+// ===============================
 function limpiarTabs() {
   seccionPendientes.classList.add("hidden");
   seccionRechazados.classList.add("hidden");
@@ -74,27 +106,34 @@ function limpiarTabs() {
 
 btnPendientes.addEventListener("click", () => {
   limpiarTabs();
+
   seccionPendientes.classList.remove("hidden");
   btnPendientes.classList.add("active");
+
   cargarPendientes();
 });
 
 btnRechazados.addEventListener("click", () => {
   limpiarTabs();
+
   seccionRechazados.classList.remove("hidden");
   btnRechazados.classList.add("active");
+
   cargarRechazados();
 });
 
 btnEventosAdmin.addEventListener("click", () => {
   limpiarTabs();
+
   seccionEventosAdmin.classList.remove("hidden");
   btnEventosAdmin.classList.add("active");
+
   cargarEventosAdmin();
 });
 
-/* CARGAR PENDIENTES */
-
+// ===============================
+// CARGAR PENDIENTES
+// ===============================
 async function cargarPendientes() {
   listaPendientes.innerHTML = "<p>Cargando registros pendientes...</p>";
 
@@ -141,23 +180,24 @@ async function cargarPendientes() {
         </div>
       `;
 
-      const btnAprobar = card.querySelector(".btn-approve");
-      const btnRechazar = card.querySelector(".btn-reject");
+      card.querySelector(".btn-approve")
+        .addEventListener("click", () => aprobarEgresado(documento.id));
 
-      btnAprobar.addEventListener("click", () => aprobarEgresado(documento.id));
-      btnRechazar.addEventListener("click", () => rechazarEgresado(documento.id));
+      card.querySelector(".btn-reject")
+        .addEventListener("click", () => rechazarEgresado(documento.id));
 
       listaPendientes.appendChild(card);
     });
 
   } catch (error) {
     console.error("Error cargando pendientes:", error);
-    listaPendientes.innerHTML = "<p>No se pudieron cargar los registros.</p>";
+    listaPendientes.innerHTML = "<p>No se pudieron cargar los registros pendientes.</p>";
   }
 }
 
-/* APROBAR EGRESADO */
-
+// ===============================
+// APROBAR EGRESADO
+// ===============================
 async function aprobarEgresado(uid) {
   const confirmar = confirm("¿Está seguro de aprobar este egresado?");
 
@@ -178,8 +218,9 @@ async function aprobarEgresado(uid) {
   }
 }
 
-/* RECHAZAR EGRESADO */
-
+// ===============================
+// RECHAZAR EGRESADO
+// ===============================
 async function rechazarEgresado(uid) {
   const motivo = prompt("Escriba el motivo del rechazo:");
 
@@ -206,8 +247,9 @@ async function rechazarEgresado(uid) {
   }
 }
 
-/* CARGAR RECHAZADOS */
-
+// ===============================
+// CARGAR RECHAZADOS
+// ===============================
 async function cargarRechazados() {
   listaRechazados.innerHTML = "<p>Cargando registros rechazados...</p>";
 
@@ -252,23 +294,24 @@ async function cargarRechazados() {
         </div>
       `;
 
-      const btnRestaurar = card.querySelector(".btn-restore");
-      const btnEliminar = card.querySelector(".btn-delete");
+      card.querySelector(".btn-restore")
+        .addEventListener("click", () => restaurarEgresado(documento.id));
 
-      btnRestaurar.addEventListener("click", () => restaurarEgresado(documento.id));
-      btnEliminar.addEventListener("click", () => eliminarEgresado(documento.id, egresado.nombre));
+      card.querySelector(".btn-delete")
+        .addEventListener("click", () => eliminarEgresado(documento.id, egresado.nombre));
 
       listaRechazados.appendChild(card);
     });
 
   } catch (error) {
     console.error("Error cargando rechazados:", error);
-    listaRechazados.innerHTML = "<p>No se pudieron cargar los rechazados.</p>";
+    listaRechazados.innerHTML = "<p>No se pudieron cargar los registros rechazados.</p>";
   }
 }
 
-/* RESTAURAR RECHAZADO */
-
+// ===============================
+// RESTAURAR RECHAZADO
+// ===============================
 async function restaurarEgresado(uid) {
   const confirmar = confirm("¿Desea volver este registro a pendiente?");
 
@@ -291,8 +334,9 @@ async function restaurarEgresado(uid) {
   }
 }
 
-/* ELIMINAR RECHAZADO */
-
+// ===============================
+// ELIMINAR RECHAZADO
+// ===============================
 async function eliminarEgresado(uid, nombre) {
   const confirmar = confirm(`¿Está seguro de eliminar el registro de ${nombre || "este egresado"}?`);
 
@@ -314,26 +358,33 @@ async function eliminarEgresado(uid, nombre) {
   }
 }
 
-/* CREAR EVENTO */
-
+// ===============================
+// CREAR EVENTO
+// ===============================
 formEvento.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  const evento = {
-    titulo: document.getElementById("tituloEvento").value.trim(),
-    fecha: document.getElementById("fechaEvento").value,
-    hora: document.getElementById("horaEvento").value,
-    lugar: document.getElementById("lugarEvento").value.trim(),
-    modalidad: document.getElementById("modalidadEvento").value,
-    descripcion: document.getElementById("descripcionEvento").value.trim(),
-    enlace: document.getElementById("enlaceEvento").value.trim(),
-    estado: "publicado",
-    creadoPor: usuarioAdmin.uid,
-    fechaCreacion: serverTimestamp()
-  };
+  const titulo = document.getElementById("tituloEvento").value.trim();
+  const fechaEvento = document.getElementById("fechaEvento").value;
+  const horaEvento = document.getElementById("horaEvento").value;
+  const lugar = document.getElementById("lugarEvento").value.trim();
+  const modalidad = document.getElementById("modalidadEvento").value;
+  const descripcion = document.getElementById("descripcionEvento").value.trim();
+  const enlace = document.getElementById("enlaceEvento").value.trim();
 
   try {
-    await addDoc(collection(db, "eventos"), evento);
+    await addDoc(collection(db, "eventos"), {
+      titulo,
+      fechaEvento,
+      horaEvento,
+      lugar,
+      modalidad,
+      descripcion,
+      enlace,
+      estado: "publicado",
+      creadoPor: usuarioAdmin.uid,
+      fechaCreacion: serverTimestamp()
+    });
 
     alert("Evento publicado correctamente.");
     formEvento.reset();
@@ -341,17 +392,23 @@ formEvento.addEventListener("submit", async (event) => {
 
   } catch (error) {
     console.error("Error publicando evento:", error);
-    alert("No se pudo publicar el evento.");
+    alert("No se pudo publicar el evento. Revise permisos o consola.");
   }
 });
 
-/* CARGAR EVENTOS ADMIN */
-
+// ===============================
+// CARGAR EVENTOS ADMIN
+// ===============================
 async function cargarEventosAdmin() {
   listaEventosAdmin.innerHTML = "<p>Cargando eventos...</p>";
 
   try {
-    const resultado = await getDocs(collection(db, "eventos"));
+    const consulta = query(
+      collection(db, "eventos"),
+      orderBy("fechaEvento", "asc")
+    );
+
+    const resultado = await getDocs(consulta);
 
     if (resultado.empty) {
       listaEventosAdmin.innerHTML = `
@@ -374,8 +431,8 @@ async function cargarEventosAdmin() {
         <h3>${evento.titulo || "Evento sin título"}</h3>
 
         <div class="admin-info-grid">
-          <p><strong>Fecha:</strong> ${evento.fecha || "No registra"}</p>
-          <p><strong>Hora:</strong> ${evento.hora || "No registra"}</p>
+          <p><strong>Fecha:</strong> ${evento.fechaEvento || "No registra"}</p>
+          <p><strong>Hora:</strong> ${evento.horaEvento || "No registra"}</p>
           <p><strong>Modalidad:</strong> ${evento.modalidad || "No registra"}</p>
           <p><strong>Lugar:</strong> ${evento.lugar || "No registra"}</p>
           <p><strong>Estado:</strong> ${evento.estado || "publicado"}</p>
@@ -383,17 +440,23 @@ async function cargarEventosAdmin() {
 
         <p class="admin-description">${evento.descripcion || ""}</p>
 
+        ${
+          evento.enlace
+            ? `<p><a href="${evento.enlace}" target="_blank">Ver enlace del evento</a></p>`
+            : ""
+        }
+
         <div class="admin-actions">
           <button class="btn-reject">Ocultar evento</button>
           <button class="btn-delete">Eliminar evento</button>
         </div>
       `;
 
-      const btnOcultar = card.querySelector(".btn-reject");
-      const btnEliminar = card.querySelector(".btn-delete");
+      card.querySelector(".btn-reject")
+        .addEventListener("click", () => ocultarEvento(documento.id));
 
-      btnOcultar.addEventListener("click", () => ocultarEvento(documento.id));
-      btnEliminar.addEventListener("click", () => eliminarEvento(documento.id));
+      card.querySelector(".btn-delete")
+        .addEventListener("click", () => eliminarEvento(documento.id));
 
       listaEventosAdmin.appendChild(card);
     });
@@ -404,8 +467,9 @@ async function cargarEventosAdmin() {
   }
 }
 
-/* OCULTAR EVENTO */
-
+// ===============================
+// OCULTAR EVENTO
+// ===============================
 async function ocultarEvento(id) {
   const confirmar = confirm("¿Desea ocultar este evento para los egresados?");
 
@@ -426,8 +490,9 @@ async function ocultarEvento(id) {
   }
 }
 
-/* ELIMINAR EVENTO */
-
+// ===============================
+// ELIMINAR EVENTO
+// ===============================
 async function eliminarEvento(id) {
   const confirmar = confirm("¿Está seguro de eliminar este evento?");
 
@@ -445,93 +510,10 @@ async function eliminarEvento(id) {
   }
 }
 
-/* CERRAR SESIÓN */
-
+// ===============================
+// CERRAR SESIÓN
+// ===============================
 cerrarSesionAdmin.addEventListener("click", async () => {
   await signOut(auth);
   window.location.href = "admin-login.html";
 });
-
-const formEvento = document.getElementById("formEvento");
-const listaEventosAdmin = document.getElementById("listaEventosAdmin");
-
-formEvento.addEventListener("submit", async (event) => {
-  event.preventDefault();
-
-  const titulo = document.getElementById("tituloEvento").value.trim();
-  const fechaEvento = document.getElementById("fechaEvento").value;
-  const horaEvento = document.getElementById("horaEvento").value;
-  const lugar = document.getElementById("lugarEvento").value.trim();
-  const modalidad = document.getElementById("modalidadEvento").value;
-  const descripcion = document.getElementById("descripcionEvento").value.trim();
-  const enlace = document.getElementById("enlaceEvento").value.trim();
-
-  try {
-    await addDoc(collection(db, "eventos"), {
-      titulo,
-      fechaEvento,
-      horaEvento,
-      lugar,
-      modalidad,
-      descripcion,
-      enlace,
-      estado: "publicado",
-      fechaCreacion: serverTimestamp()
-    });
-
-    alert("Evento publicado correctamente.");
-
-    formEvento.reset();
-    cargarEventosAdmin();
-
-  } catch (error) {
-    console.error("Error al publicar evento:", error);
-    alert("No se pudo publicar el evento. Revise permisos o consola.");
-  }
-});
-
-async function cargarEventosAdmin() {
-  if (!listaEventosAdmin) return;
-
-  listaEventosAdmin.innerHTML = "<p>Cargando eventos...</p>";
-
-  try {
-    const consulta = query(
-      collection(db, "eventos"),
-      orderBy("fechaEvento", "asc")
-    );
-
-    const resultado = await getDocs(consulta);
-
-    if (resultado.empty) {
-      listaEventosAdmin.innerHTML = "<p>No hay eventos publicados.</p>";
-      return;
-    }
-
-    listaEventosAdmin.innerHTML = "";
-
-    resultado.forEach((documento) => {
-      const evento = documento.data();
-
-      listaEventosAdmin.innerHTML += `
-        <article class="admin-item">
-          <h3>${evento.titulo || "Evento sin título"}</h3>
-          <p><strong>Fecha:</strong> ${evento.fechaEvento || "Sin fecha"}</p>
-          <p><strong>Hora:</strong> ${evento.horaEvento || "Sin hora"}</p>
-          <p><strong>Lugar:</strong> ${evento.lugar || "No registrado"}</p>
-          <p><strong>Modalidad:</strong> ${evento.modalidad || "No registrada"}</p>
-          <p>${evento.descripcion || ""}</p>
-          ${
-            evento.enlace
-              ? `<a href="${evento.enlace}" target="_blank">Ver enlace del evento</a>`
-              : ""
-          }
-        </article>
-      `;
-    });
-
-  } catch (error) {
-    console.error("Error al cargar eventos:", error);
-    listaEventosAdmin.innerHTML = "<p>No se pudieron cargar los eventos.</p>";
-  }
-}

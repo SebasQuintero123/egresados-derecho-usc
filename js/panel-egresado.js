@@ -17,71 +17,93 @@ import {
   orderBy
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+alert("panel-egresado.js actualizado sí está cargando");
+
+// ===============================
 // ELEMENTOS PRINCIPALES
+// ===============================
 const bienvenida = document.getElementById("bienvenida");
 const cerrarSesion = document.getElementById("cerrarSesion");
 const formPerfil = document.getElementById("formPerfil");
 const estadoPublicacion = document.getElementById("estadoPublicacion");
 const despublicarHV = document.getElementById("despublicarHV");
 
+// ===============================
 // BOTONES DEL MENÚ
-const btnMiHojaVida = document.getElementById("btnMiHojaVida");
-const btnOfertasLaborales = document.getElementById("btnOfertasLaborales");
-
-// SECCIONES
-const seccionMiHojaVida = document.getElementById("seccionMiHojaVida");
-const seccionOfertasLaborales = document.getElementById("seccionOfertasLaborales");
-
-// OFERTAS LABORALES
-const listaOfertasLaborales = document.getElementById("listaOfertasLaborales");
-const buscarOfertaLaboral = document.getElementById("buscarOfertaLaboral");
-
+// ===============================
 const btnMiHojaVida = document.getElementById("btnMiHojaVida");
 const btnOfertasLaborales = document.getElementById("btnOfertasLaborales");
 const btnEventos = document.getElementById("btnEventos");
 
+// ===============================
+// SECCIONES
+// ===============================
 const seccionMiHojaVida = document.getElementById("seccionMiHojaVida");
 const seccionOfertasLaborales = document.getElementById("seccionOfertasLaborales");
 const seccionEventosEgresado = document.getElementById("seccionEventosEgresado");
 
+// ===============================
+// OFERTAS LABORALES
+// ===============================
+const listaOfertasLaborales = document.getElementById("listaOfertasLaborales");
+const buscarOfertaLaboral = document.getElementById("buscarOfertaLaboral");
+
+// ===============================
+// EVENTOS
+// ===============================
 const listaEventosEgresado = document.getElementById("listaEventosEgresado");
 
+// ===============================
+// VARIABLES GLOBALES
+// ===============================
 let usuarioActual = null;
 let referenciaEgresado = null;
 let ofertasLaborales = [];
 
+// ===============================
 // VALIDAR SESIÓN DEL EGRESADO
+// ===============================
 onAuthStateChanged(auth, async (usuario) => {
   if (!usuario) {
     window.location.href = "login-egresado.html";
     return;
   }
 
-  usuarioActual = usuario;
-  referenciaEgresado = doc(db, "egresados", usuario.uid);
+  try {
+    usuarioActual = usuario;
+    referenciaEgresado = doc(db, "egresados", usuario.uid);
 
-  const documento = await getDoc(referenciaEgresado);
+    const documento = await getDoc(referenciaEgresado);
 
-  if (!documento.exists()) {
-    alert("No se encontró el perfil del egresado.");
+    if (!documento.exists()) {
+      alert("No se encontró el perfil del egresado.");
+      await signOut(auth);
+      window.location.href = "login-egresado.html";
+      return;
+    }
+
+    const datos = documento.data();
+
+    if (datos.estado !== "aprobado") {
+      alert("Su cuenta todavía no ha sido aprobada por el administrador.");
+      await signOut(auth);
+      window.location.href = "login-egresado.html";
+      return;
+    }
+
+    cargarDatos(datos);
+
+  } catch (error) {
+    console.error("Error al validar sesión:", error);
+    alert("No se pudo validar la sesión del egresado.");
     await signOut(auth);
     window.location.href = "login-egresado.html";
-    return;
   }
-
-  const datos = documento.data();
-
-  if (datos.estado !== "aprobado") {
-    alert("Su cuenta todavía no ha sido aprobada por el administrador.");
-    await signOut(auth);
-    window.location.href = "login-egresado.html";
-    return;
-  }
-
-  cargarDatos(datos);
 });
 
+// ===============================
 // CARGAR DATOS DEL EGRESADO
+// ===============================
 function cargarDatos(datos) {
   bienvenida.textContent = `Bienvenido, ${datos.nombre || "egresado"}`;
 
@@ -114,7 +136,51 @@ function cargarDatos(datos) {
   }
 }
 
+// =============================== 
+// CAMBIO DE SECCIONES
+// ===============================
+function ocultarSecciones() {
+  seccionMiHojaVida.classList.add("hidden");
+  seccionOfertasLaborales.classList.add("hidden");
+  seccionEventosEgresado.classList.add("hidden");
+
+  btnMiHojaVida.classList.remove("active");
+  btnOfertasLaborales.classList.remove("active");
+  btnEventos.classList.remove("active");
+}
+
+btnMiHojaVida.addEventListener("click", () => {
+  ocultarSecciones();
+
+  seccionMiHojaVida.classList.remove("hidden");
+  btnMiHojaVida.classList.add("active");
+});
+
+btnOfertasLaborales.addEventListener("click", () => {
+  console.log("Botón Ofertas presionado");
+
+  ocultarSecciones();
+
+  seccionOfertasLaborales.classList.remove("hidden");
+  btnOfertasLaborales.classList.add("active");
+
+  cargarOfertasLaborales();
+});
+
+btnEventos.addEventListener("click", () => {
+  console.log("Botón Eventos presionado");
+
+  ocultarSecciones();
+
+  seccionEventosEgresado.classList.remove("hidden");
+  btnEventos.classList.add("active");
+
+  cargarEventosEgresado();
+});
+
+// ===============================
 // GUARDAR HOJA DE VIDA
+// ===============================
 formPerfil.addEventListener("submit", async (event) => {
   event.preventDefault();
 
@@ -147,7 +213,9 @@ formPerfil.addEventListener("submit", async (event) => {
   }
 });
 
+// ===============================
 // OCULTAR HOJA DE VIDA
+// ===============================
 despublicarHV.addEventListener("click", async () => {
   try {
     await updateDoc(referenciaEgresado, {
@@ -166,27 +234,9 @@ despublicarHV.addEventListener("click", async () => {
   }
 });
 
-// CAMBIAR A SECCIÓN MI HOJA DE VIDA
-btnMiHojaVida.addEventListener("click", () => {
-  seccionMiHojaVida.classList.remove("hidden");
-  seccionOfertasLaborales.classList.add("hidden");
-
-  btnMiHojaVida.classList.add("active");
-  btnOfertasLaborales.classList.remove("active");
-});
-
-// CAMBIAR A SECCIÓN OFERTAS LABORALES
-btnOfertasLaborales.addEventListener("click", () => {
-  seccionOfertasLaborales.classList.remove("hidden");
-  seccionMiHojaVida.classList.add("hidden");
-
-  btnOfertasLaborales.classList.add("active");
-  btnMiHojaVida.classList.remove("active");
-
-  cargarOfertasLaborales();
-});
-
+// ===============================
 // CARGAR OFERTAS LABORALES
+// ===============================
 async function cargarOfertasLaborales() {
   listaOfertasLaborales.innerHTML = "<p>Cargando ofertas laborales...</p>";
 
@@ -229,9 +279,20 @@ async function cargarOfertasLaborales() {
   }
 }
 
+// ===============================
 // MOSTRAR OFERTAS LABORALES
+// ===============================
 function mostrarOfertasLaborales(lista) {
   listaOfertasLaborales.innerHTML = "";
+
+  if (lista.length === 0) {
+    listaOfertasLaborales.innerHTML = `
+      <div class="empty-message">
+        <p>No se encontraron ofertas con esa búsqueda.</p>
+      </div>
+    `;
+    return;
+  }
 
   lista.forEach((oferta) => {
     const card = document.createElement("article");
@@ -263,8 +324,8 @@ function mostrarOfertasLaborales(lista) {
 
       ${
         oferta.correoContacto
-        ? `<a href="mailto:${oferta.correoContacto}" class="btn-contact">Postularme</a>`
-        : ""
+          ? `<a href="mailto:${oferta.correoContacto}" class="btn-contact">Postularme</a>`
+          : ""
       }
     `;
 
@@ -272,7 +333,9 @@ function mostrarOfertasLaborales(lista) {
   });
 }
 
+// ===============================
 // BUSCADOR DE OFERTAS
+// ===============================
 buscarOfertaLaboral.addEventListener("input", () => {
   const texto = buscarOfertaLaboral.value.toLowerCase().trim();
 
@@ -293,92 +356,95 @@ buscarOfertaLaboral.addEventListener("input", () => {
   mostrarOfertasLaborales(filtradas);
 });
 
-// CERRAR SESIÓN
-cerrarSesion.addEventListener("click", async () => {
-  await signOut(auth);
-  window.location.href = "login-egresado.html";
-});
-
-function ocultarSecciones() {
-  seccionMiHojaVida.classList.add("hidden");
-  seccionOfertasLaborales.classList.add("hidden");
-  seccionEventosEgresado.classList.add("hidden");
-
-  btnMiHojaVida.classList.remove("active");
-  btnOfertasLaborales.classList.remove("active");
-  btnEventos.classList.remove("active");
-}
-
-btnMiHojaVida.addEventListener("click", () => {
-  ocultarSecciones();
-  seccionMiHojaVida.classList.remove("hidden");
-  btnMiHojaVida.classList.add("active");
-});
-
-btnOfertasLaborales.addEventListener("click", () => {
-  ocultarSecciones();
-  seccionOfertasLaborales.classList.remove("hidden");
-  btnOfertasLaborales.classList.add("active");
-
-  // Si ya tienes esta función creada, la dejas.
-  if (typeof cargarOfertasLaborales === "function") {
-    cargarOfertasLaborales();
-  }
-});
-
-btnEventos.addEventListener("click", () => {
-  ocultarSecciones();
-  seccionEventosEgresado.classList.remove("hidden");
-  btnEventos.classList.add("active");
-
-  cargarEventosEgresado();
-});
-
+// ===============================
+// CARGAR EVENTOS EN PANEL EGRESADO
+// ===============================
 async function cargarEventosEgresado() {
   listaEventosEgresado.innerHTML = "<p>Cargando eventos...</p>";
 
   try {
     const consulta = query(
-      collection(db, "eventos"),
-      orderBy("fechaEvento", "asc")
+      collection(db, "eventos")
     );
 
     const resultado = await getDocs(consulta);
 
     if (resultado.empty) {
-      listaEventosEgresado.innerHTML = "<p>No hay eventos publicados por el momento.</p>";
+      listaEventosEgresado.innerHTML = `
+        <div class="empty-message">
+          <p>No hay eventos publicados por el momento.</p>
+        </div>
+      `;
       return;
     }
 
     listaEventosEgresado.innerHTML = "";
 
+    let eventosPublicados = 0;
+
     resultado.forEach((documento) => {
       const evento = documento.data();
 
-      if (evento.estado !== "publicado") return;
+      if (evento.estado !== "publicado") {
+        return;
+      }
 
-      listaEventosEgresado.innerHTML += `
-        <article class="job-card">
-          <h3>${evento.titulo || "Evento"}</h3>
+      eventosPublicados++;
 
-          <p><strong>Fecha:</strong> ${evento.fechaEvento || "Sin fecha"}</p>
-          <p><strong>Hora:</strong> ${evento.horaEvento || "Sin hora"}</p>
+      const fechaMostrar = evento.fechaEvento || evento.fecha || "Sin fecha";
+      const horaMostrar = evento.horaEvento || evento.hora || "Sin hora";
+
+      const card = document.createElement("article");
+      card.classList.add("job-egresado-card");
+
+      card.innerHTML = `
+        <h3>${evento.titulo || "Evento"}</h3>
+
+        <div class="job-info-grid">
+          <p><strong>Fecha:</strong> ${fechaMostrar}</p>
+          <p><strong>Hora:</strong> ${horaMostrar}</p>
           <p><strong>Lugar:</strong> ${evento.lugar || "No registrado"}</p>
           <p><strong>Modalidad:</strong> ${evento.modalidad || "No registrada"}</p>
+        </div>
 
-          <p>${evento.descripcion || ""}</p>
+        <div class="cv-section">
+          <h4>Descripción</h4>
+          <p>${evento.descripcion || "Sin descripción."}</p>
+        </div>
 
-          ${
-            evento.enlace
-              ? `<a href="${evento.enlace}" target="_blank" class="btn-job">Ver enlace del evento</a>`
-              : ""
-          }
-        </article>
+        ${
+          evento.enlace
+            ? `<a href="${evento.enlace}" target="_blank" class="btn-contact">Ver enlace del evento</a>`
+            : ""
+        }
       `;
+
+      listaEventosEgresado.appendChild(card);
     });
+
+    if (eventosPublicados === 0) {
+      listaEventosEgresado.innerHTML = `
+        <div class="empty-message">
+          <p>No hay eventos publicados por el momento.</p>
+        </div>
+      `;
+    }
 
   } catch (error) {
     console.error("Error al cargar eventos:", error);
-    listaEventosEgresado.innerHTML = "<p>No se pudieron cargar los eventos.</p>";
+
+    listaEventosEgresado.innerHTML = `
+      <div class="empty-message">
+        <p>No se pudieron cargar los eventos.</p>
+      </div>
+    `;
   }
 }
+
+// ===============================
+// CERRAR SESIÓN
+// ===============================
+cerrarSesion.addEventListener("click", async () => {
+  await signOut(auth);
+  window.location.href = "login-egresado.html";
+});
