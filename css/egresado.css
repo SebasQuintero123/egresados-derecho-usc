@@ -1,131 +1,188 @@
 /* ===============================
-   ACCESO EGRESADO / EMPLEADOR
+   ACCESO EGRESADO / EMPLEADOR - PRO
 ================================ */
 
 :root {
   --usc-red: #8b0000;
   --usc-red-dark: #5f0000;
   --usc-gold: #f4c400;
-  --bg-main: #f5f7fb;
   --white: #ffffff;
   --text-main: #1f2937;
   --text-muted: #6b7280;
   --border: #e5e7eb;
-  --shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
-  --shadow-soft: 0 10px 25px rgba(15, 23, 42, 0.08);
+  --shadow: 0 22px 50px rgba(15, 23, 42, 0.14);
+  --shadow-soft: 0 12px 28px rgba(15, 23, 42, 0.09);
 }
 
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.access-page {
-  min-height: 100vh;
+body {
   background:
-    radial-gradient(circle at top left, rgba(139, 0, 0, 0.10), transparent 28%),
+    radial-gradient(circle at top left, rgba(139, 0, 0, 0.14), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(244, 196, 0, 0.16), transparent 30%),
     linear-gradient(135deg, #f8fafc 0%, #eef3f8 100%);
+  color: var(--text-main);
+}
+
+/* PÁGINA GENERAL */
+
+.access-page,
+.employer-access-page {
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 40px 20px;
+  padding: 45px 20px;
 }
 
-.access-card {
+/* TARJETA PRINCIPAL */
+
+.access-card,
+.employer-access-card {
   width: 100%;
-  max-width: 980px;
-  background: var(--white);
-  padding: 48px;
-  border-radius: 28px;
+  max-width: 1050px;
+  background: rgba(255, 255, 255, 0.96);
+  padding: 52px;
+  border-radius: 32px;
   text-align: center;
   box-shadow: var(--shadow);
-  border-top: 7px solid var(--usc-red);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  position: relative;
+  overflow: hidden;
 }
 
-.access-card h1 {
+.access-card::before,
+.employer-access-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 9px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--usc-red), var(--usc-gold), var(--usc-red));
+}
+
+.access-card::after,
+.employer-access-card::after {
+  content: "⚖️";
+  position: absolute;
+  right: 35px;
+  top: 28px;
+  font-size: 46px;
+  opacity: 0.10;
+}
+
+/* TÍTULOS */
+
+.access-card h1,
+.employer-access-card h1 {
   color: var(--usc-red);
-  font-size: clamp(30px, 5vw, 44px);
-  margin: 0 0 16px 0;
+  font-size: clamp(32px, 5vw, 48px);
+  margin-bottom: 18px;
   font-weight: 900;
-  letter-spacing: -1px;
+  letter-spacing: -1.3px;
 }
 
-.access-text {
-  max-width: 700px;
-  margin: 0 auto 38px auto;
+.access-text,
+.employer-access-card > p {
+  max-width: 750px;
+  margin: 0 auto 42px auto;
   font-size: 18px;
   color: var(--text-muted);
   line-height: 1.7;
 }
 
-.access-options {
+/* OPCIONES */
+
+.access-options,
+.employer-options {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 26px;
-  margin-bottom: 32px;
+  gap: 28px;
+  margin-bottom: 34px;
 }
 
-.option-card {
+.option-card,
+.employer-option-card {
   display: block;
   background: #ffffff;
-  padding: 34px;
-  border-radius: 24px;
+  padding: 38px 32px;
+  border-radius: 26px;
   text-decoration: none;
   color: var(--text-main);
   border: 1px solid var(--border);
   box-shadow: var(--shadow-soft);
-  transition: 0.25s;
+  transition: 0.25s ease;
   position: relative;
   overflow: hidden;
 }
 
-.option-card::before {
+.option-card::before,
+.employer-option-card::before {
   content: "";
   position: absolute;
-  inset: 0 0 auto 0;
-  height: 7px;
-  background: linear-gradient(90deg, var(--usc-red), var(--usc-gold));
+  left: 0;
+  top: 0;
+  width: 8px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--usc-red), var(--usc-gold));
 }
 
-.option-card:hover {
-  transform: translateY(-6px);
+.option-card:hover,
+.employer-option-card:hover {
+  transform: translateY(-7px);
   box-shadow: var(--shadow);
+  border-color: rgba(139, 0, 0, 0.18);
 }
 
-.option-card h2 {
+.option-card h2,
+.employer-option-card h2 {
   color: var(--usc-red);
-  margin: 0 0 14px 0;
-  font-size: 27px;
+  margin-bottom: 14px;
+  font-size: 28px;
   font-weight: 900;
 }
 
-.option-card p {
+.option-card p,
+.employer-option-card p {
   font-size: 16px;
   color: var(--text-muted);
   line-height: 1.7;
-  margin-bottom: 22px;
+  margin-bottom: 24px;
 }
 
-.option-card span {
+.option-card span,
+.employer-option-card span {
   display: inline-block;
   background: var(--usc-red);
   color: var(--white);
-  padding: 13px 22px;
+  padding: 14px 24px;
   border-radius: 14px;
   font-weight: 900;
-  transition: 0.25s;
+  transition: 0.25s ease;
+  box-shadow: 0 10px 24px rgba(139, 0, 0, 0.22);
 }
 
-.option-card:hover span {
+.option-card:hover span,
+.employer-option-card:hover span {
   background: var(--usc-red-dark);
+  transform: translateY(-2px);
 }
+
+/* LINK VOLVER */
 
 .back-link {
   display: inline-block;
-  margin-top: 12px;
+  margin-top: 14px;
   color: var(--usc-red);
   font-weight: 900;
   text-decoration: none;
-  transition: 0.25s;
+  transition: 0.25s ease;
 }
 
 .back-link:hover {
@@ -133,12 +190,22 @@
   transform: translateY(-2px);
 }
 
+/* RESPONSIVE */
+
 @media (max-width: 768px) {
-  .access-card {
-    padding: 34px 22px;
+  .access-card,
+  .employer-access-card {
+    padding: 38px 24px;
+    border-radius: 26px;
   }
 
-  .access-options {
+  .access-options,
+  .employer-options {
     grid-template-columns: 1fr;
+  }
+
+  .option-card,
+  .employer-option-card {
+    padding: 32px 24px;
   }
 }
