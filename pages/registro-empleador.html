@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registro Empleador</title>
 
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/empleador.css">
+  <link rel="stylesheet" href="../css/style.css?v=6">
+  <link rel="stylesheet" href="../css/registro.css?v=1">
 </head>
 <body>
 
@@ -17,7 +17,8 @@
       <h1>Registro de empleador</h1>
 
       <p>
-        Complete los datos de la empresa o entidad para crear la cuenta empresarial.
+        Complete los datos de la empresa o entidad para crear la cuenta empresarial
+        y publicar oportunidades laborales para egresados del programa de Derecho.
       </p>
 
       <form id="formRegistroEmpleador" class="employer-form">
@@ -62,16 +63,23 @@
           <input id="confirmarPasswordEmpresa" type="password" placeholder="Repita la contraseña" required>
         </div>
 
-        <button type="submit" class="btn-employer">Registrarme</button>
+        <div class="form-note">
+          La cuenta empresarial permitirá publicar vacantes y consultar hojas de vida
+          visibles de egresados aprobados por la plataforma.
+        </div>
+
+        <button type="submit" class="btn-employer">
+          Crear cuenta empresarial
+        </button>
 
       </form>
 
-      <a href="empleador.html" class="back-link">Volver</a>
+      <a href="empleador.html" class="back-link">Volver al acceso de empleadores</a>
 
     </section>
 
   </main>
 
-  <script type="module" src="../js/registro-empleador.js"></script>
+  <script type="module" src="../js/registro-empleador.js?v=2"></script>
 </body>
 </html>

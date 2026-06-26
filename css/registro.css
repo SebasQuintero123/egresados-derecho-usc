@@ -1,0 +1,248 @@
+/* ===============================
+   REGISTRO EGRESADO / EMPLEADOR
+================================ */
+
+:root {
+  --usc-red: #8b0000;
+  --usc-red-dark: #5f0000;
+  --usc-gold: #f4c400;
+  --bg-main: #f5f7fb;
+  --white: #ffffff;
+  --text-main: #1f2937;
+  --text-muted: #6b7280;
+  --border: #e5e7eb;
+  --shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+  --shadow-soft: 0 10px 25px rgba(15, 23, 42, 0.08);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background:
+    radial-gradient(circle at top left, rgba(139, 0, 0, 0.10), transparent 28%),
+    linear-gradient(135deg, #f8fafc 0%, #eef3f8 100%);
+  color: var(--text-main);
+}
+
+/* Página */
+
+.register-page,
+.employer-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 45px 20px;
+}
+
+/* Tarjeta */
+
+.register-card,
+.employer-card {
+  width: 100%;
+  max-width: 980px;
+  background: var(--white);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+  padding: 48px 44px;
+  border-top: 7px solid var(--usc-red);
+  position: relative;
+  overflow: hidden;
+}
+
+.register-card::before,
+.employer-card::before {
+  content: "";
+  position: absolute;
+  right: -80px;
+  top: -80px;
+  width: 220px;
+  height: 220px;
+  background: rgba(139, 0, 0, 0.07);
+  border-radius: 50%;
+}
+
+.register-card h1,
+.employer-card h1 {
+  text-align: center;
+  color: var(--usc-red);
+  font-size: clamp(30px, 5vw, 42px);
+  margin-bottom: 16px;
+  font-weight: 900;
+  letter-spacing: -1px;
+  position: relative;
+  z-index: 2;
+}
+
+.register-text,
+.employer-card > p {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 17px;
+  margin: 0 auto 36px auto;
+  line-height: 1.7;
+  max-width: 720px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Formularios */
+
+.register-form,
+.employer-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group.full {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  font-weight: 900;
+  color: var(--text-main);
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 14px;
+  font-size: 15px;
+  background: #ffffff;
+  outline: none;
+  transition: 0.25s;
+  color: var(--text-main);
+}
+
+.form-group textarea {
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--usc-red);
+  box-shadow: 0 0 0 4px rgba(139, 0, 0, 0.10);
+}
+
+.form-group input:disabled {
+  background: #f3f4f6;
+  color: var(--text-muted);
+}
+
+/* Checkbox */
+
+.check {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 15px;
+  color: var(--text-muted);
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+.check input {
+  margin-top: 4px;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--usc-red);
+}
+
+/* Botones */
+
+.btn-register,
+.btn-employer {
+  grid-column: 1 / -1;
+  justify-self: center;
+  background: var(--usc-red);
+  color: var(--white);
+  border: none;
+  padding: 15px 34px;
+  border-radius: 14px;
+  font-size: 17px;
+  font-weight: 900;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: 0.25s;
+  box-shadow: 0 10px 24px rgba(139, 0, 0, 0.20);
+}
+
+.btn-register:hover,
+.btn-employer:hover {
+  background: var(--usc-red-dark);
+  transform: translateY(-2px);
+}
+
+.back-link {
+  display: block;
+  text-align: center;
+  margin-top: 28px;
+  font-weight: 900;
+  color: var(--usc-red);
+  text-decoration: none;
+  position: relative;
+  z-index: 2;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+/* Nota inferior */
+
+.form-note {
+  grid-column: 1 / -1;
+  background: #f9fafb;
+  border-left: 4px solid var(--usc-red);
+  padding: 16px;
+  border-radius: 14px;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  .register-page,
+  .employer-page {
+    padding: 30px 16px;
+  }
+
+  .register-card,
+  .employer-card {
+    padding: 36px 24px;
+    border-radius: 24px;
+  }
+
+  .register-form,
+  .employer-form {
+    grid-template-columns: 1fr;
+  }
+
+  .btn-register,
+  .btn-employer {
+    width: 100%;
+  }
+}
