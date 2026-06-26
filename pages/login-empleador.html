@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login Empleador</title>
 
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/empleador.css">
+  <link rel="stylesheet" href="../css/style.css?v=5">
+  <link rel="stylesheet" href="../css/login-empleador.css?v=1">
 </head>
 <body>
 
@@ -17,34 +17,48 @@
       <h1>Iniciar sesión</h1>
 
       <p>
-        Ingrese con el correo empresarial y la contraseña registrada.
+        Ingrese con el correo empresarial y la contraseña registrada para acceder
+        al panel de empleadores.
       </p>
 
       <form id="formLoginEmpleador" class="employer-login-form">
 
         <div class="form-group">
           <label for="correoLoginEmpresa">Correo empresarial</label>
-          <input id="correoLoginEmpresa" type="email" placeholder="correo@empresa.com" required>
+          <input 
+            id="correoLoginEmpresa" 
+            type="email" 
+            placeholder="correo@empresa.com" 
+            required
+          >
         </div>
 
         <div class="form-group">
           <label for="passwordLoginEmpresa">Contraseña</label>
-          <input id="passwordLoginEmpresa" type="password" placeholder="Ingrese la contraseña" required>
+          <input 
+            id="passwordLoginEmpresa" 
+            type="password" 
+            placeholder="Ingrese la contraseña" 
+            required
+          >
         </div>
 
-        <button type="submit" class="btn-employer">Ingresar</button>
+        <button type="submit" class="btn-employer-login">
+          Ingresar
+        </button>
 
       </form>
 
       <div class="employer-login-links">
         <a href="registro-empleador.html">No tengo cuenta</a>
-        <a href="empleador.html">Volver</a>
+        <a href="empleador.html">Volver al acceso de empleadores</a>
+        <a href="../index.html">Volver al inicio</a>
       </div>
 
     </section>
 
   </main>
 
-  <script type="module" src="../js/login-empleador.js"></script>
+  <script type="module" src="../js/login-empleador.js?v=2"></script>
 </body>
 </html>

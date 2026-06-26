@@ -1,5 +1,5 @@
 /* ===============================
-   LOGIN EGRESADO - DISEÑO PRO
+   LOGIN EMPLEADOR - DISEÑO PRO
 ================================ */
 
 :root {
@@ -12,7 +12,6 @@
   --text-muted: #6b7280;
   --border: #e5e7eb;
   --shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
-  --shadow-soft: 0 10px 25px rgba(15, 23, 42, 0.08);
 }
 
 * {
@@ -24,7 +23,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.login-page {
+.employer-login-page {
   min-height: 100vh;
   background:
     radial-gradient(circle at top left, rgba(139, 0, 0, 0.10), transparent 28%),
@@ -35,7 +34,7 @@ body {
   padding: 40px 20px;
 }
 
-.login-card {
+.employer-login-card {
   width: 100%;
   max-width: 540px;
   background: var(--white);
@@ -48,8 +47,8 @@ body {
   overflow: hidden;
 }
 
-.login-card::before {
-  content: "🎓";
+.employer-login-card::before {
+  content: "🏢";
   position: absolute;
   top: 22px;
   right: 28px;
@@ -57,7 +56,7 @@ body {
   opacity: 0.16;
 }
 
-.login-card h1 {
+.employer-login-card h1 {
   color: var(--usc-red);
   font-size: clamp(30px, 5vw, 40px);
   margin: 0 0 14px 0;
@@ -65,14 +64,14 @@ body {
   letter-spacing: -1px;
 }
 
-.login-text {
+.employer-login-card p {
   color: var(--text-muted);
   font-size: 17px;
   line-height: 1.7;
   margin-bottom: 32px;
 }
 
-.login-form {
+.employer-login-form {
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -108,7 +107,7 @@ body {
   box-shadow: 0 0 0 4px rgba(139, 0, 0, 0.10);
 }
 
-.btn-login {
+.btn-employer-login {
   background: var(--usc-red);
   color: var(--white);
   border: none;
@@ -122,32 +121,12 @@ body {
   box-shadow: 0 10px 24px rgba(139, 0, 0, 0.20);
 }
 
-.btn-login:hover {
+.btn-employer-login:hover {
   background: var(--usc-red-dark);
   transform: translateY(-2px);
 }
 
-.forgot-password,
-.forgot-password-link {
-  background: none;
-  border: none;
-  color: var(--usc-red);
-  font-weight: 900;
-  text-align: right;
-  cursor: pointer;
-  padding: 0;
-  margin-top: -4px;
-  margin-bottom: 8px;
-  text-decoration: none;
-  font-size: 14px;
-}
-
-.forgot-password:hover,
-.forgot-password-link:hover {
-  text-decoration: underline;
-}
-
-.login-links {
+.employer-login-links {
   margin-top: 28px;
   display: flex;
   flex-direction: column;
@@ -155,38 +134,26 @@ body {
   text-align: center;
 }
 
-.login-links a {
+.employer-login-links a {
   color: var(--usc-red);
   font-weight: 900;
   text-decoration: none;
   transition: 0.25s;
 }
 
-.login-links a:hover {
+.employer-login-links a:hover {
   text-decoration: underline;
-}
-
-.small-card {
-  max-width: 520px;
-}
-
-.mensaje-recuperacion {
-  margin-top: 20px;
-  text-align: center;
-  font-weight: 900;
-  line-height: 1.5;
-  color: var(--usc-red);
 }
 
 /* Responsive */
 
 @media (max-width: 600px) {
-  .login-card {
+  .employer-login-card {
     padding: 36px 24px;
     border-radius: 24px;
   }
 
-  .login-card h1 {
+  .employer-login-card h1 {
     font-size: 30px;
   }
 }
