@@ -1,97 +1,141 @@
+/* ===============================
+   ACCESO EGRESADO / EMPLEADOR
+================================ */
+
+:root {
+  --usc-red: #8b0000;
+  --usc-red-dark: #5f0000;
+  --usc-gold: #f4c400;
+  --bg-main: #f5f7fb;
+  --white: #ffffff;
+  --text-main: #1f2937;
+  --text-muted: #6b7280;
+  --border: #e5e7eb;
+  --shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+  --shadow-soft: 0 10px 25px rgba(15, 23, 42, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
 .access-page {
   min-height: 100vh;
-  background: #f4f4f4;
+  background:
+    radial-gradient(circle at top left, rgba(139, 0, 0, 0.10), transparent 28%),
+    linear-gradient(135deg, #f8fafc 0%, #eef3f8 100%);
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 30px;
+  padding: 40px 20px;
 }
 
 .access-card {
   width: 100%;
-  max-width: 900px;
-  background: white;
-  padding: 45px;
-  border-radius: 16px;
+  max-width: 980px;
+  background: var(--white);
+  padding: 48px;
+  border-radius: 28px;
   text-align: center;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.18);
+  box-shadow: var(--shadow);
+  border-top: 7px solid var(--usc-red);
 }
 
 .access-card h1 {
-  color: #8b0000;
-  font-size: 36px;
-  margin-bottom: 15px;
+  color: var(--usc-red);
+  font-size: clamp(30px, 5vw, 44px);
+  margin: 0 0 16px 0;
+  font-weight: 900;
+  letter-spacing: -1px;
 }
 
 .access-text {
-  max-width: 650px;
-  margin: 0 auto 35px auto;
+  max-width: 700px;
+  margin: 0 auto 38px auto;
   font-size: 18px;
-  color: #333;
+  color: var(--text-muted);
+  line-height: 1.7;
 }
 
 .access-options {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 25px;
-  margin-bottom: 30px;
+  gap: 26px;
+  margin-bottom: 32px;
 }
 
 .option-card {
   display: block;
-  background: #f7f7f7;
-  padding: 30px;
-  border-radius: 12px;
+  background: #ffffff;
+  padding: 34px;
+  border-radius: 24px;
   text-decoration: none;
-  color: #222;
-  border-top: 5px solid #8b0000;
-  transition: 0.3s;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+  transition: 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.option-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 7px;
+  background: linear-gradient(90deg, var(--usc-red), var(--usc-gold));
 }
 
 .option-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow);
 }
 
 .option-card h2 {
-  color: #8b0000;
-  margin-bottom: 12px;
-  font-size: 24px;
+  color: var(--usc-red);
+  margin: 0 0 14px 0;
+  font-size: 27px;
+  font-weight: 900;
 }
 
 .option-card p {
   font-size: 16px;
-  margin-bottom: 20px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 22px;
 }
 
 .option-card span {
   display: inline-block;
-  background: #f1c40f;
-  color: #222;
-  padding: 12px 22px;
-  border-radius: 6px;
-  font-weight: bold;
+  background: var(--usc-red);
+  color: var(--white);
+  padding: 13px 22px;
+  border-radius: 14px;
+  font-weight: 900;
+  transition: 0.25s;
+}
+
+.option-card:hover span {
+  background: var(--usc-red-dark);
 }
 
 .back-link {
   display: inline-block;
-  margin-top: 10px;
-  color: #8b0000;
-  font-weight: bold;
+  margin-top: 12px;
+  color: var(--usc-red);
+  font-weight: 900;
   text-decoration: none;
+  transition: 0.25s;
 }
 
 .back-link:hover {
   text-decoration: underline;
+  transform: translateY(-2px);
 }
 
 @media (max-width: 768px) {
   .access-card {
-    padding: 30px 20px;
-  }
-
-  .access-card h1 {
-    font-size: 28px;
+    padding: 34px 22px;
   }
 
   .access-options {
